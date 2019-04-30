@@ -94,11 +94,15 @@
 # define SYX_PATH_SEPARATOR '\\'
 # define SYX_ENV_PATH_SEPARATOR ';'
 # define SYX_ENV_PATH_SEPARATOR_S ";"
-# ifdef _DLL
-#  define EXPORT __declspec(dllexport) extern
+# ifdef SYX_LINK_DYNAMIC
+#   ifdef _DLL
+#     define EXPORT __declspec(dllexport) extern
+#   else
+#     define EXPORT __declspec(dllimport) extern
+#   endif /* _DLL */
 # else
-#  define EXPORT __declspec(dllimport) extern
-# endif /* _DLL */
+#   define EXPORT extern
+# endif
 #else /* !WINDOWS */
 # define SYX_PATH_SEPARATOR '/'
 # define SYX_ENV_PATH_SEPARATOR ':'
